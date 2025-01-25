@@ -20,20 +20,22 @@
             justify-content: center;
             align-items: center;
         }
-        img {
+        img, object {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Ensures the aspect ratio is preserved */
+            object-fit: contain;
+            image-rendering: crisp-edges;
         }
     </style>
 </head>
 <body>
     <div class="svg-container">
         <!-- Link to the external SVG file -->
-        <img src="https://raw.githubusercontent.com/Vitabiks/vitabiks.github.io/refs/heads/main/lehendia.svg" alt="SVG Image">
+        <img src="path/to/your/svgfile.svg" alt="SVG Image">
     </div>
 </body>
 </html>
+
 
 
 
