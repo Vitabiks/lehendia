@@ -25,19 +25,20 @@
 <body>
 
 <div id="svg-container">
-    <object id="svg-object" type="image/svg+xml" data="https://raw.githubusercontent.com/Vitabiks/vitabiks.github.io/refs/heads/main/lehendia.svg">
-        Your browser does not support SVG.
-    </object>
+    <!-- Directly embed the SVG markup from the provided URL -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9212 4028">
+        <!-- Insert your SVG content here from the URL or the raw SVG file -->
+    </svg>
 </div>
 
 <script>
     // Wait for the DOM content to be loaded
     document.addEventListener("DOMContentLoaded", function() {
-        var svgElement = document.getElementById('svg-object').contentDocument;
+        var svgElement = document.querySelector('svg');
         
         if (svgElement) {
             // Initialise the pan-zoom on the SVG element
-            var panZoomInstance = svgPanZoom(svgElement.documentElement, {
+            var panZoomInstance = svgPanZoom(svgElement, {
                 zoomEnabled: true,
                 controlIconsEnabled: true,
                 fit: true,
@@ -49,3 +50,4 @@
 
 </body>
 </html>
+
