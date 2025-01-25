@@ -35,18 +35,10 @@
     // Set map view and boundaries to match the SVG dimensions
     map.setView([500, 500], 0); // Centred view
 
-    // Add the SVG as an overlay
-    const svgElement = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
-        <rect width="1000" height="1000" fill="lightblue" />
-        <circle cx="500" cy="500" r="100" fill="red" />
-        <text x="500" y="500" text-anchor="middle" dominant-baseline="middle" font-size="24" fill="white">
-          SVG Map
-        </text>
-      </svg>
-    `;
+    // Link to an external SVG file
+    const svgUrl = "https://raw.githubusercontent.com/Vitabiks/vitabiks.github.io/refs/heads/main/lehendia.svg"; // Replace with your SVG file URL
 
-    const svgOverlay = L.imageOverlay("data:image/svg+xml;base64," + btoa(svgElement), svgBounds);
+    const svgOverlay = L.imageOverlay(svgUrl, svgBounds);
     svgOverlay.addTo(map);
 
     // Add zoom and pan controls
