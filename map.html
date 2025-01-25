@@ -3,51 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVG Pan and Zoom</title>
+    <title>Full-Screen SVG</title>
     <style>
-        /* Set the container size and add some padding */
-        #svg-container {
-            width: 100%;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
             height: 100vh;
-            position: relative;
-            overflow: hidden;
+            background-color: #f0f0f0;
         }
-
-        /* Allow the SVG to fill the container */
-        svg {
+        .svg-container {
             width: 100%;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensures the aspect ratio is preserved */
         }
     </style>
-    <!-- Load svg-pan-zoom from a CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.0/dist/svg-pan-zoom.min.js"></script>
 </head>
 <body>
-
-<div id="svg-container">
-    <!-- Directly embed the SVG markup from the provided URL -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9212 4028">
-        <!-- Insert your SVG content here from the URL or the raw SVG file -->
-    </svg>
-</div>
-
-<script>
-    // Wait for the DOM content to be loaded
-    document.addEventListener("DOMContentLoaded", function() {
-        var svgElement = document.querySelector('svg');
-        
-        if (svgElement) {
-            // Initialise the pan-zoom on the SVG element
-            var panZoomInstance = svgPanZoom(svgElement, {
-                zoomEnabled: true,
-                controlIconsEnabled: true,
-                fit: true,
-                center: true
-            });
-        }
-    });
-</script>
-
+    <div class="svg-container">
+        <!-- Link to the external SVG file -->
+        <img src="https://raw.githubusercontent.com/Vitabiks/vitabiks.github.io/refs/heads/main/lehendia.svg" alt="SVG Image">
+    </div>
 </body>
 </html>
+
+
 
