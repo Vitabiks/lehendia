@@ -1,62 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leaflet SVG Map</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <style>
-    #map {
-      width: 100%;
-      height: 100vh;
-    }
-    .svg-overlay {
-      position: absolute;
-      pointer-events: none; /* Allows Leaflet controls to work */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Pan and Zoom</title>
+    <style>
+        /* Set the container size and add some padding */
+        #svg-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Allow the SVG to fill the container */
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <!-- Load svg-pan-zoom from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.0/dist/svg-pan-zoom.min.js"></script>
 </head>
 <body>
-  <div id="map"></div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<div id="svg-container">
+    <object id="svg-object" type="image/svg+xml" data="https://raw.githubusercontent.com/Vitabiks/vitabiks.github.io/refs/heads/main/lehendia.svg">
+        Your browser does not support SVG.
+    </object>
+</div>
 
-  <script>
-    // Initialise the Leaflet map
-    const map = L.map('map', {
-      crs: L.CRS.Simple, // Simple CRS for custom coordinate system
-      minZoom: -2,
-      maxZoom: 5,
+<script>
+    // Wait for the DOM content to be loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        var svgElement = document.getElementById('svg-object').contentDocument;
+        
+        if (svgElement) {
+            // Initialise the pan-zoom on the SVG element
+            var panZoomInstance = svgPanZoom(svgElement.documentElement, {
+                zoomEnabled: true,
+                controlIconsEnabled: true,
+                fit: true,
+                center: true
+            });
+        }
     });
+</script>
 
-    // Define the bounds of the SVG (e.g., 1000x1000px)
-    const svgBounds = [[0, 0], [1000, 1000]];
-
-    // Set map view and boundaries to match the SVG dimensions
-    map.setView([500, 500], 0); // Centred view
-
-    // Add the SVG as a custom pane for better scaling
-    map.createPane('svgPane');
-    map.getPane('svgPane').style.zIndex = 400;
-
-    // Use the SVG as an ImageOverlay, ensuring it does not blur
-    const svgUrl = "https://raw.githubusercontent.com/Vitabiks/vitabiks.github.io/refs/heads/main/lehendia.svg"; // Replace with your SVG file URL
-    const svgOverlay = L.imageOverlay(svgUrl, svgBounds, {
-      pane: 'svgPane',
-    });
-    svgOverlay.addTo(map);
-
-    // Ensure the overlay maintains its sharpness during zoom
-    map.on('zoom', () => {
-      const zoomLevel = map.getZoom();
-      const scale = Math.pow(2, zoomLevel);
-      map.getPane('svgPane').style.transform = `scale(${scale})`;
-    });
-
-    // Add zoom and pan controls
-    L.control.zoom({
-      position: 'topright'
-    }).addTo(map);
-  </script>
 </body>
 </html>
